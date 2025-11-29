@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab3v-app
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lab3v-application
+  namespace: argocd
+spec:
+  project: default
+  
+  # Fuente: Repositorio Git
+  source:
+    repoURL: https://github.com/Castyblank320/lab3v.git
+    targetRevision: main
+    path: k8s
+  
+  # Destino: Cluster de Kubernetes
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: lab3v-app
+  
+  # Política de sincronización
+  syncPolicy:
+    automated:
+      prune: true      # Eliminar recursos que ya no están en Git
+      selfHeal: true   # Corregir automáticamente drift de configuración
+      allowEmpty: false
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
