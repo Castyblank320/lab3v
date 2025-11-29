@@ -21,8 +21,8 @@ spec:
     spec:
       containers:
         - name: lab3v-app
-          image: localhost:65121/lab3v-app:latest
-          imagePullPolicy: Always
+          image: lab3v-app:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8089
               name: http
