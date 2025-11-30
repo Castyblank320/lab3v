@@ -1,0 +1,9 @@
+# Configuración RBAC para dar permisos admin por defecto
+# Aplicar con: kubectl patch configmap argocd-rbac-cm -n argocd --type merge --patch-file argocd-rbac-cm.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  policy.default: "role:admin"

@@ -11,7 +11,7 @@ COPY target/lab3v-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8089
   
   # Ejecutar la aplicación con límites de memoria JVM
-  # -Xmx320m: Máximo heap 320MB (deja ~190MB para metaspace, overhead, etc)
+  # -Xmx512m: Máximo heap 512MB (deja ~250MB para metaspace, overhead, etc en contenedor 768Mi)
   # -Xms256m: Heap inicial 256MB
-  # -XX:MaxMetaspaceSize=96m: Límite para Metaspace
-ENTRYPOINT ["java", "-Xmx320m", "-Xms256m", "-XX:MaxMetaspaceSize=96m", "-jar", "app.jar"]
+  # -XX:MaxMetaspaceSize=128m: Límite para Metaspace
+ENTRYPOINT ["java", "-Xmx512m", "-Xms256m", "-XX:MaxMetaspaceSize=128m", "-jar", "app.jar"]

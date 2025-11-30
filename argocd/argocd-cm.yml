@@ -1,0 +1,9 @@
+# Configuración para habilitar acceso anónimo a ArgoCD
+# Aplicar con: kubectl patch configmap argocd-cm -n argocd --type merge --patch-file argocd-cm.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  users.anonymous.enabled: "true"
